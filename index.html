@@ -13,18 +13,20 @@
     function initMap() {
         
         var markers = [];
-        var counter=0;
+        var counter = 0;
+        var map;
+        var watchID;
         
         navigator.geolocation.getCurrentPosition(function(position) {
             console.log('got coords!', position)
             var myLatLng = {lat: position.coords.latitude , lng: position.coords.longitude};
             
-            var map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
                 center: myLatLng
             });
             
-            var watchID = navigator.geolocation.watchPosition(function(position) {
+            watchID = navigator.geolocation.watchPosition(function(position) {
                 console.log(position);
                 counter++;
                 document.title = counter;
