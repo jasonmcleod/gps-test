@@ -24,7 +24,14 @@
                     title: 'M' + counter
                 }));
                 map.setCenter(pos);
-            });
+            }, function(){}, 
+     
+     {
+         timeout: 0,
+         enableHighAccuracy: true,
+         maximumAge: Infinity
+     }                                          
+                                                             );
             
             var myLatLng = {lat: 35.0602691, lng: -80.8465333};
             
