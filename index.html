@@ -8,12 +8,22 @@
     <div id="map"></div>
     <!-- Replace the value of the key parameter with your own API key. -->
     
-    </script>
-    <script>
-        function initMap() {
+</script>
+<script>
+    function initMap() {
+        
+        var markers = [];
+        var counter=0;
+        
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log('got coords!', position)
+            var myLatLng = {lat: position.coords.latitude , lng: position.coords.longitude};
             
-            var markers = [];
-            var counter=0;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: myLatLng
+            });
+            
             var watchID = navigator.geolocation.watchPosition(function(position) {
                 console.log(position);
                 counter++;
@@ -29,28 +39,18 @@
                 console.error(err);
             },      
             {
-               timeout: 0,
+                timeout: 0,
                 enableHighAccuracy: true,
                 maximumAge: Infinity
             });
-
-
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log('got coords!', position)
-                var myLatLng = {lat: position.coords.latitude , lng: position.coords.longitude};
-                
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 16,
-                    center: myLatLng
-                });
-            });
-
-            setTimeout(function() {
-                document.getElementById('map').style.position = 'initial';
-                console.log('fixed?');
-            }, 2000);
-        }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQbI2RE6cRbqIjAQgfKdKizw-pywl01yk&callback=initMap"></script>
+        });
+        
+        setTimeout(function() {
+            document.getElementById('map').style.position = 'initial';
+            console.log('fixed?');
+        }, 2000);
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQbI2RE6cRbqIjAQgfKdKizw-pywl01yk&callback=initMap"></script>
 </body>
 </html>
