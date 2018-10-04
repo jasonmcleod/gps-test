@@ -31,7 +31,10 @@
                 center: myLatLng
             });
 
-            document.getElementById('map').style.position = 'initial';
+            setTimeout(function() {
+                document.getElementById('map').style.position = 'initial';
+                console.log('fixed?');
+            }, 2000);
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQbI2RE6cRbqIjAQgfKdKizw-pywl01yk&callback=initMap"></script>
