@@ -1,0 +1,27 @@
+<div id="map"></div>
+<!-- Replace the value of the key parameter with your own API key. -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+</script>
+<script>
+    function initMap() {
+
+        var markers = [];
+        var counter=0;
+        var watchID = navigator.geolocation.watchPosition(function(position) {
+            console.log(position);
+            counter++
+            markers.push(new google.maps.Marker({
+                position: {lat: position.coords.latitude, lng: position.coords.longitude},
+                map: map,
+                title: 'M' + counter
+            }));
+        });
+
+        var myLatLng = {lat: 35.0602691, lng: -80.8465333};
+    
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: myLatLng
+        });
+    }
+</script>
