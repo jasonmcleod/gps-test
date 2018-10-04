@@ -16,12 +16,14 @@
             var counter=0;
             var watchID = navigator.geolocation.watchPosition(function(position) {
                 console.log(position);
-                counter++
+                counter++;
+                var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
                 markers.push(new google.maps.Marker({
-                    position: {lat: position.coords.latitude, lng: position.coords.longitude},
+                    position: pos,
                     map: map,
                     title: 'M' + counter
                 }));
+                map.setCenter(pos);
             });
             
             var myLatLng = {lat: 35.0602691, lng: -80.8465333};
